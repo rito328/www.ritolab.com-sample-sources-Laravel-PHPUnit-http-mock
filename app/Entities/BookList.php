@@ -12,16 +12,40 @@ class BookList implements \IteratorAggregate
         $this->bookList = new \ArrayObject();
     }
 
-    public function add(Book $book)
+    /**
+     * @param array $books
+     * @throws \Exception
+     */
+    public function set(array $books): void
+    {
+        if (array_keys($books)[0] !== 0) {
+            throw new \Exception('データ形式が正しくありません');
+        }
+
+        foreach ($books as $b) {
+            $this->add(new Book($b['id'], $b['name'], $b['author']['name']));
+        }
+    }
+
+    /**
+     * @param Book $book
+     */
+    private function add(Book $book): void
     {
         $this->bookList[] = $book;
     }
 
-    public function count()
+    /**
+     * @return int
+     */
+    public function count(): int
     {
         return $this->bookList->count();
     }
 
+    /**
+     * @return \ArrayIterator
+     */
     public function getIterator(): \ArrayIterator
     {
         return $this->bookList->getIterator();
