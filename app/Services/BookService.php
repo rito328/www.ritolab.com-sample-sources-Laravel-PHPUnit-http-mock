@@ -24,9 +24,7 @@ class BookService implements BookDataAccess
     {
         $data = $this->BookDataAccess->getList();
 
-        array_map(function($d) {
-            $this->BookList->add(new Book($d['id'], $d['name'], $d['author']['name']));
-        }, $data);
+        $this->BookList->set($data);
 
         return $this->BookList;
     }
