@@ -3,7 +3,6 @@ declare(strict_types=1);
 
 namespace App\Services;
 
-use App\Entities\Book;
 use App\Entities\BookList;
 
 class BookService implements BookDataAccess
